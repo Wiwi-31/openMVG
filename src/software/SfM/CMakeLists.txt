@@ -268,6 +268,12 @@ set_property(TARGET openMVG_main_evalQuality PROPERTY FOLDER OpenMVG/software)
 install(TARGETS openMVG_main_evalQuality DESTINATION bin/)
 
 ##
+# SFM specific: Catch PMVS path from CMAKE
+##
+SET(OPENMVG_PMVS_PATH "/usr/lib/PMVS/" CACHE STRING "Path to your PMVS binary folder")
+SET(OPENMVG_PMVS_BIN_PATH "${OPENMVG_PMVS_PATH}/main")
+
+##
 # Export tutorial with valid path thanks to a configuration file
 ##
 set(OPENMVG_SOFTWARE_SFM_SRC_DIR ${CMAKE_CURRENT_LIST_DIR})
@@ -289,6 +295,14 @@ set(OPENMVG_TUTORIAL_IN_FILE "${CMAKE_CURRENT_LIST_DIR}/SfM_SequentialPipeline.p
 configure_file(${OPENMVG_TUTORIAL_IN_FILE}
     "${CMAKE_CURRENT_BINARY_DIR}/SfM_SequentialPipeline.py" @ONLY)
 
+set(OPENMVG_TUTORIAL_IN_FILE "${CMAKE_CURRENT_LIST_DIR}/SfM_AutomaticGlobalPipelinePMVS.py.in")
+configure_file(${OPENMVG_TUTORIAL_IN_FILE}
+    "${CMAKE_CURRENT_BINARY_DIR}/SfM_AutomaticGlobalPipelinePMVS.py" @ONLY)
+
+set(OPENMVG_TUTORIAL_IN_FILE "${CMAKE_CURRENT_LIST_DIR}/SfM_AutomaticSequentialPipelinePMVS.py.in")
+configure_file(${OPENMVG_TUTORIAL_IN_FILE}
+    "${CMAKE_CURRENT_BINARY_DIR}/SfM_AutomaticSequentialPipelinePMVS.py" @ONLY)
+    
 add_subdirectory(clustering)
 add_subdirectory(export)
 add_subdirectory(import)
